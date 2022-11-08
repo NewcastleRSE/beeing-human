@@ -1,66 +1,78 @@
-# Standard Project
-A template repo for the standard RSE project
+# Bee-ing Human
+A master repo for all things *Bee-ing Human*, including data, auxiliary scripts, and auxiliary tools. Separate repos will be created and linked to for production elements of the project (i.e., web portal, TEI data, etc.)
 
 ## About
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin ante at eleifend eleifend. Sed non vestibulum nisi. Aliquam vel condimentum quam. Donec fringilla et purus at auctor. Praesent euismod vitae metus non consectetur. Sed interdum aliquet nisl at efficitur. Nulla urna quam, gravida eget elementum eget, mattis nec tortor. Fusce ut neque tellus. Integer at magna feugiat lacus porta posuere eget vitae metus.
-
-Curabitur a tempus arcu. Maecenas blandit risus quam, quis convallis justo pretium in. Suspendisse rutrum, elit at venenatis cursus, dolor ligula iaculis dui, ut dignissim enim justo at ligula. Donec interdum dignissim egestas. Nullam nec ultrices enim. Nam quis arcu tincidunt, auctor purus sit amet, aliquam libero. Fusce rhoncus lectus ac imperdiet varius. Sed gravida urna eros, ac luctus justo condimentum nec. Integer ultrices nibh in neque sagittis, at pretium erat pretium. Praesent feugiat purus id iaculis laoreet. Proin in tellus tristique, congue ante in, sodales quam. Sed imperdiet est tortor, eget vestibulum tortor pulvinar volutpat. In et pretium nisl.
+*Bee-ing Human* is an interdisciplinary research gathering researchers and practitioners from literary studies, musicology, digital humanities and biology (animal behaviour). It centres on a seventeenth-century apiculture book, Charles Butler's *The Feminine Monarchy of Bees*, using it both as an object of study and as a departure point to contrast the early modern knowledge and culture around bees and beekeeping with the latest research in animal behaviour and emotion. Literary scholars will study and edit Butler's original text, musicologists will study the compositions included in Butler's writing, as well as respond with new compositions and reinterpretations of the sound of bees and research results; biologists, inspired by Butler's work, will work on the emotional states of bees, and Digital Humanists will create the final output, a digital bee-book for the 21st century, that will gather all the material and research produced during the project, as well as create digital experiments to communicate the research methods employed by the different disciplines. Alongside this disciplinary research, we will record, document, and present our own interdisciplinary process, as bees with different roles working together for the good of the colony.
 
 ### Project Team
-Dr L. Ipsum, Newcastle University  ([lorem.ipsum@newcastle.ac.uk](mailto:lorem.ipsum@newcastle.ac.uk))  
-Professor D. Sit Amet, XY University  ([d.sit.amet@newcastle.ac.uk](mailto:d.sit.amet@example.com))  
+Professor Jenny Richards, Newcastle University  ([jennifer.richards@newcastle.ac.uk](mailto:jennifer.richards@newcastle.ac.uk))  
+Professor Magnus Williamson, Newcastle University  ([magnus.williamson@newcastle.ac.uk](mailto:magnus.williamson@newcastle.ac.uk))
+Dr Bennett Hogg, Newcastle University  ([bennett.hogg@newcastle.ac.uk](mailto:bennett.hogg@newcastle.ac.uk))  
+Dr Vivek Nityananda, Newcastle University  ([vivek.nityananda@newcastle.ac.uk](mailto:vivek.nityananda@newcastle.ac.uk))
+Dr Olivia Smith, Newcastle University  ([olivia.smith2@newcastle.ac.uk](mailto:olivia.smith2@newcastle.ac.uk))  
+Dr Balu Gs, Newcastle University  ([balu.g-s@newcastle.ac.uk](mailto:balu.g-s@newcastle.ac.uk))
+Dr Tiago Sousa Garcia, Newcastle University  ([tiago.sousa-garcia@newcastle.ac.uk](mailto:tiago.sousa-garcia@newcastle.ac.uk))
+
 
 ### RSE Contact
-C. Adipiscing  
+Dr Tiago Sousa Garcia
 RSE Team  
 Newcastle University  
-([consectetur.adpiscing@newcastle.ac.uk](mailto:consectetur.adpiscing@newcastle.ac.uk))  
+([tiago.sousa-garcia@newcastle.ac.uk](mailto:tiago.sousa-garcia@newcastle.ac.uk))  
 
 ## Built With
 
+```
 This section is intended to list the frameworks and tools you're using to develop this software. Please link to the home page or documentatation in each case.
+```
+TBD
 
-[Framework 1](https://something.com)  
-[Framework 2](https://something.com)  
-[Framework 3](https://something.com)  
+[TEI](https://tei-c.org/)  
 
 ## Getting Started
 
 ### Prerequisites
 
+```
 Any tools or versions of languages needed to run code. For example specific Python or Node versions. Minimum hardware requirements also go here.
+```
+TBD
 
 ### Installation
 
+```
 How to build or install the applcation.
+```
 
 ### Running Locally
-
+```
 How to run the application on your local system.
+```
 
 ### Running Tests
-
+```
 How to run tests on your local system.
+```
 
 ## Deployment
 
 ### Local
-
+```
 Deploying to a production style setup but on the local system. Examples of this would include `venv`, `anaconda`, `Docker` or `minikube`. 
-
+```
 ### Production
-
+```
 Deploying to the production system. Examples of this would include cloud, HPC or virtual machine. 
-
+```
 ## Usage
-
+```
 Any links to production environment, video demos and screenshots.
-
+```
 ## Roadmap
 
-- [x] Initial Research  
-- [ ] Minimum viable product <-- You are Here  
+- [x] Initial Research <-- You are Here  
+- [ ] Minimum viable product
 - [ ] Alpha Release  
 - [ ] Feature-Complete Release  
 
@@ -94,4 +106,4 @@ Please cite the associated papers for this work if you use this code:
 
 
 ## Acknowledgements
-This work was funded by a grant from the UK Research Councils, EPSRC grant ref. EP/L012345/1, “Example project title, please update”.
+This work was funded by a grant from the [Leverhulme Trust](https://www.leverhulme.ac.uk/).
