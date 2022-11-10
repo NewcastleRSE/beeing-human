@@ -1,5 +1,5 @@
 def tokenizer_split(split_text):
-    marks = ['[', '{', ']', '}', '*', '###', '##', '#', '~~~']
+    marks = ['[', '{', ']', '}', '/*', '*', '/###', '###', '/##','##', '/#', '#', '~~~']
     text_tokenised = []
     for token in split_text:
         new_token = token
@@ -28,23 +28,27 @@ def tokenizer(text):
         
             
 
-def parser_single_open_close(token, i, error_list, parser_queue):
+def parser_single_open_close(token, i, error_list, parser_queue, valid_tags, single_marks_opening, single_marks_closing):
     # checks tags that open and close with different characters
-    single_marks_opening = "{["
-    single_marks_closing = "}]"
+    
     for opening, closing in zip(single_marks_opening, single_marks_closing):
             if token == opening:
                 parser_queue.append((i, closing))
             elif token == closing:
-                if token == parser_queue[-1][1]:
+                if parser_queue == []:
+                    # error: closing without opening with an empty list
+                    # error_list = [poosition, type, closing]
+                    error_list.append([i, 2, token])
+                elif token == parser_queue[-1][1] and parser_queue != []:
+                    valid_tags.append([parser_queue[-1][0], i+1])
                     parser_queue.pop(-1)
                 else:
-                    error_list.append(f"Error: expected '{parser_queue[-1][1]}' got '{token}' instead. Position: {i}")
-    return error_list, parser_queue
+                    # error_list = [position, type, expected, found]
+                    error_list.append([i, 0, parser_queue[-1][1], token])
+    return error_list, parser_queue, valid_tags
 
-def parser_single_same(token, i, error_list, parser_queue, valid_tags):
+def parser_single_same(token, i, error_list, parser_queue, valid_tags, single_marks):
     # checks tags that open and close using the same character (i.e., '*')
-    single_marks = ['*']
     for mark in single_marks:
         if parser_queue != []:
             if token == mark and token != parser_queue[-1][1]:
@@ -60,20 +64,40 @@ def parser_single_same(token, i, error_list, parser_queue, valid_tags):
     return error_list, parser_queue, valid_tags
 
 def parser(text):
-    
+    single_marks = ""
+    single_marks_opening = ['{', '[', '*', '###', '##', '#']
+    single_marks_closing = ['}', ']', '/*', '/###', '/##', '/#']
     parser_queue = []
     error_list = []
     valid_tags = []
     tokenized_text = tokenizer(text)
     for i, token in enumerate(tokenized_text):
-        # error_list, parser_queue = parser_single_open_close(token, i, error_list, parser_queue)
-        error_list, parser_queue, valid_tags = parser_single_same(token, i, error_list, parser_queue, valid_tags)
-
+        if token in single_marks_opening or token in single_marks_closing:
+            error_list, parser_queue, valid_tags = parser_single_open_close(token, i, error_list, parser_queue, valid_tags, single_marks_opening, single_marks_closing)
+            pass
+        elif token in single_marks:
+            pass
+            # error_list, parser_queue, valid_tags = parser_single_same(token, i, error_list, parser_queue, valid_tags, single_marks)
+    
+    # report
+    # 0 - Unexpected (f"Error: expected '{parser_queue[-1][1]}' got '{token}' instead. Position: {i}")
+    # 1 - Opening Tag Never Closed(f"Error: opening tag '{orphan[1]}' at position {orphan[0]} was never closed")
     if parser_queue != []:
         for orphan in parser_queue:
-            error_list.append(f"Error: opening tag '{orphan[1]}' at position {orphan[0]} was never closed")
-    for error in error_list:
-        print(error)
-    for valid_tag in valid_tags[0:10]:
-        print(f"{valid_tag}: {' '.join(tokenized_text[valid_tag[0]:valid_tag[1]])}")
-    print(len(valid_tags))
+            # error_list = [position, type, orphan]
+            error_list.append([orphan[0], 1, orphan[1]])
+    if error_list != []:
+        print("\n ====== Errors ====== \n")
+        # order list by position
+        error_list = sorted(error_list, key = lambda x: x[0])
+        for error in error_list:
+            if error[1] == 0:
+                print(f"Error: expected '{error[2]}' got '{error[3]}' instead. Position: {error[0]}: '{' '.join(tokenized_text[error[0]:error[0]+10])}'")
+            elif error[1] == 1:
+                print(f"Error: opening tag '{error[2]}' at position {error[0]} was never closed: '{' '.join(tokenized_text[error[0]:error[0]+10])}'")
+            elif error[1] == 2:
+                print(f"Error: Closing tag '{error[2]}' at position {error[0]} was never opened: '{' '.join(tokenized_text[error[0]:error[0]+10])}'")
+    if valid_tags != []:
+        print("\n ====== Valid tags ====== \n")
+        for valid_tag in valid_tags:
+            print(f"{valid_tag}: {' '.join(tokenized_text[valid_tag[0]:valid_tag[1]])}")
