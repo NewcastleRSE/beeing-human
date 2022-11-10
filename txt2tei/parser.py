@@ -101,3 +101,4 @@ def parser(text):
         print("\n ====== Valid tags ====== \n")
         for valid_tag in valid_tags:
             print(f"{valid_tag}: {' '.join(tokenized_text[valid_tag[0]:valid_tag[1]])}")
+    return valid_tags, tokenized_text
