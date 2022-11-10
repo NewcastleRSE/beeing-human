@@ -20,7 +20,9 @@ def tokenizer_split(split_text):
 
 def tokenizer(text):
     # tokenizes the text, which will allow us to check for character multiples
-    split_text = text.split(" ")
+    # split_text = text.split(" ")
+    # preserves spaces:
+    split_text = [i for j in text.split(" ") for i in (j, " ")][:-1]
     text_tokenised = tokenizer_split(split_text)
     while text_tokenised != tokenizer_split(text_tokenised):
         text_tokenised = tokenizer_split(text_tokenised)
@@ -87,18 +89,18 @@ def parser(text):
             # error_list = [position, type, orphan]
             error_list.append([orphan[0], 1, orphan[1]])
     if error_list != []:
-        print("\n ====== Errors ====== \n")
+        # print("\n ====== Errors ====== \n")
         # order list by position
         error_list = sorted(error_list, key = lambda x: x[0])
-        for error in error_list:
-            if error[1] == 0:
-                print(f"Error: expected '{error[2]}' got '{error[3]}' instead. Position: {error[0]}: '{' '.join(tokenized_text[error[0]:error[0]+10])}'")
-            elif error[1] == 1:
-                print(f"Error: opening tag '{error[2]}' at position {error[0]} was never closed: '{' '.join(tokenized_text[error[0]:error[0]+10])}'")
-            elif error[1] == 2:
-                print(f"Error: Closing tag '{error[2]}' at position {error[0]} was never opened: '{' '.join(tokenized_text[error[0]:error[0]+10])}'")
-    if valid_tags != []:
-        print("\n ====== Valid tags ====== \n")
-        for valid_tag in valid_tags:
-            print(f"{valid_tag}: {' '.join(tokenized_text[valid_tag[0]:valid_tag[1]])}")
-    return valid_tags, tokenized_text
+        
+        # this code can be used to print out errors in a readable manner
+
+        # for error in error_list:
+        #     if error[1] == 0:
+        #         print(f"Error: expected '{error[2]}' got '{error[3]}' instead. Position: {error[0]}: '{' '.join(tokenized_text[error[0]:error[0]+10])}'")
+        #     elif error[1] == 1:
+        #         print(f"Error: opening tag '{error[2]}' at position {error[0]} was never closed: '{' '.join(tokenized_text[error[0]:error[0]+10])}'")
+        #     elif error[1] == 2:
+        #         print(f"Error: Closing tag '{error[2]}' at position {error[0]} was never opened: '{' '.join(tokenized_text[error[0]:error[0]+10])}'")
+
+    return valid_tags, tokenized_text, error_list
