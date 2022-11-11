@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Bee-ing Human transcription checker</h1>
+<h2>Upload a file to check</h2>
+<div class="upload-form">
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" id="file-to-check" name="file">
+        <input type="submit" value="Upload">
+    </form>
+</div>
+{% endblock %}

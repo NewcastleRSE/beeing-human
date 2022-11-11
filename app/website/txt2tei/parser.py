@@ -92,6 +92,7 @@ def parser(text):
         # print("\n ====== Errors ====== \n")
         # order list by position
         error_list = sorted(error_list, key = lambda x: x[0])
+        errors = True
         
         # this code can be used to print out errors in a readable manner
 
@@ -102,5 +103,7 @@ def parser(text):
         #         print(f"Error: opening tag '{error[2]}' at position {error[0]} was never closed: '{' '.join(tokenized_text[error[0]:error[0]+10])}'")
         #     elif error[1] == 2:
         #         print(f"Error: Closing tag '{error[2]}' at position {error[0]} was never opened: '{' '.join(tokenized_text[error[0]:error[0]+10])}'")
+    else:
+        errors = False
 
-    return valid_tags, tokenized_text, error_list
+    return valid_tags, tokenized_text, error_list, errors

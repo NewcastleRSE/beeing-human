@@ -1,0 +1,19 @@
+body {
+    width: 90%;
+    margin: auto;
+}
+
+.columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.column-3 {
+    flex-basis: 30%;
+}
+
+.parser-result {
+    text-align: center;
+    align-self: center;
+}

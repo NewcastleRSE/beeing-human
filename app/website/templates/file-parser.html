@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="columns">
+        <div class="text column-3" style="white-space: pre-wrap;">
+            {{ text }}
+        </div>
+        <div class="parser-result column-3">
+            {%if errors_exist == true %}
+                <ul>
+                {% for error in error_list %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No Errors, all good!</p>
+            {% endif %}
+        </div>
+        <div class="converted-text column-3">
+            {{converted_text | safe}}
+        </div>
+    </div>
+{% endblock %}
