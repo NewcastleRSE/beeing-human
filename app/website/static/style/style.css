@@ -17,3 +17,7 @@ body {
     text-align: center;
     align-self: center;
 }
+
+.error-mark.active {
+    background-color: red;
+}

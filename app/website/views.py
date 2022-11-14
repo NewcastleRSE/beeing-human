@@ -6,6 +6,7 @@ from .txt2tei.file_load import load_txt_file_to_string
 from .txt2tei.parser import parser
 from .txt2tei.md_finders import find_tags_in_text
 from .txt2tei.replace_md_tei import replace_tags
+from .txt2tei.errors import mark_errors_for_display
 
 views = Blueprint("views", __name__)
 
@@ -39,6 +40,9 @@ def file_parser():
         valid_tags, tokenized_text, error_list, errors = parser(text)
         if errors == False:
             converted_text = replace_tags(valid_tags, tokenized_text)
+        else:
+            converted_text = False
+            text = "".join(mark_errors_for_display(error_list, tokenized_text))
         return render_template('file-parser.html', text = text, errors_exist = errors, error_list = error_list, converted_text = converted_text)
 
 

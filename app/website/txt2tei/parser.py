@@ -32,7 +32,7 @@ def tokenizer(text):
 
 def parser_single_open_close(token, i, error_list, parser_queue, valid_tags, single_marks_opening, single_marks_closing):
     # checks tags that open and close with different characters
-    
+    print(f"parser queue: {parser_queue}")
     for opening, closing in zip(single_marks_opening, single_marks_closing):
             if token == opening:
                 parser_queue.append((i, closing))

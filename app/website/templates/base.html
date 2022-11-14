@@ -8,6 +8,7 @@
     <title>Bee-ing Human Transcription Checker</title>
 </head>
 <body>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
     {% if messages %}
     <ul class=flashes>
     {% for message in messages %}
