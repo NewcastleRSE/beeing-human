@@ -3,7 +3,11 @@
 {% block content %}
     <div class="columns">
         <div class="text column-3" style="white-space: pre-wrap;">
-            <p>{{ text | safe}}</p>
+            <p contenteditable="True" id="text">{{ text | safe}}</p>
+            <form action="/file-parser" method="POST" class="hidden-form">
+                <textarea name="text" id="text-form" cols="30" rows="10" style="display: none;"></textarea>
+                <input type="submit" value="Update" onclick="transferEditedText()" class="update btn">
+            </form>
         </div>
         <div class="parser-result column-3">
             {%if errors_exist == true %}

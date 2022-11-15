@@ -6,3 +6,8 @@ function highlightErrorToggle(errorId) {
         error.classList.add("active")
     }
 }
+
+function transferEditedText() {
+    const text = document.getElementById('text').textContent
+    document.getElementById('text-form').textContent = text
+}

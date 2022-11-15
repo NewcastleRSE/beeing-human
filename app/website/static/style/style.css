@@ -13,6 +13,18 @@ body {
     flex-basis: 30%;
 }
 
+/* transcription raw styling */
+.hidden-form {
+    display: unset;
+    margin: 0;
+    padding: 0;
+}
+
+.update.btn {
+    margin: 0;
+}
+
+/* error list styling */
 .parser-result {
     text-align: center;
     align-self: center;
@@ -20,4 +32,30 @@ body {
 
 .error-mark.active {
     background-color: red;
+}
+
+/* display text styling */
+
+.drop-capital {
+    position: relative;
+    float: left;
+    font-size: 3em;
+    font-weight: bolder;
+    padding-right: 0.2em;
+    top: -0.1em;
+    line-height: 1em;
+}
+
+.catch-word {
+    text-align: right;
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+.sig {
+    text-align: center;
+}
+
+.side-note {
+    font-size: smaller;
 }

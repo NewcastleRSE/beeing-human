@@ -1,5 +1,5 @@
 def tokenizer_split(split_text):
-    marks = ['[', '{', ']', '}', '/*', '*', '/###', '###', '/##','##', '/#', '#', '~~~']
+    marks = ['[cw:', '[', '{', ']', '}', '/*', '*', '/###', '###', '/##','##', '/#', '#', '~~~', '\\', '/']
     text_tokenised = []
     for token in split_text:
         new_token = token
@@ -32,7 +32,6 @@ def tokenizer(text):
 
 def parser_single_open_close(token, i, error_list, parser_queue, valid_tags, single_marks_opening, single_marks_closing):
     # checks tags that open and close with different characters
-    print(f"parser queue: {parser_queue}")
     for opening, closing in zip(single_marks_opening, single_marks_closing):
             if token == opening:
                 parser_queue.append((i, closing))
@@ -41,34 +40,36 @@ def parser_single_open_close(token, i, error_list, parser_queue, valid_tags, sin
                     # error: closing without opening with an empty list
                     # error_list = [poosition, type, closing]
                     error_list.append([i, 2, token])
+                    break
                 elif token == parser_queue[-1][1] and parser_queue != []:
                     valid_tags.append([parser_queue[-1][0], i+1])
                     parser_queue.pop(-1)
+                    break
                 else:
                     # error_list = [position, type, expected, found]
                     error_list.append([i, 0, parser_queue[-1][1], token])
+                    break
     return error_list, parser_queue, valid_tags
 
-def parser_single_same(token, i, error_list, parser_queue, valid_tags, single_marks):
-    # checks tags that open and close using the same character (i.e., '*')
-    for mark in single_marks:
-        if parser_queue != []:
-            if token == mark and token != parser_queue[-1][1]:
-                parser_queue.append((i, mark))
-                valid_tags.append([i,0])
-            elif token == mark and token == parser_queue[-1][1]:
-                parser_queue.pop(-1)
-                valid_tags[-1][1] = i+1
-        elif parser_queue == []:
-            if token == mark:
-                parser_queue.append((i, mark))
-                valid_tags.append([i,0])
-    return error_list, parser_queue, valid_tags
+# def parser_single_same(token, i, error_list, parser_queue, valid_tags, single_marks):
+#     # checks tags that open and close using the same character (i.e., '*')
+#     for mark in single_marks:
+#         if parser_queue != []:
+#             if token == mark and token != parser_queue[-1][1]:
+#                 parser_queue.append((i, mark))
+#                 valid_tags.append([i,0])
+#             elif token == mark and token == parser_queue[-1][1]:
+#                 parser_queue.pop(-1)
+#                 valid_tags[-1][1] = i+1
+#         elif parser_queue == []:
+#             if token == mark:
+#                 parser_queue.append((i, mark))
+#                 valid_tags.append([i,0])
+#     return error_list, parser_queue, valid_tags
 
 def parser(text):
-    single_marks = ""
-    single_marks_opening = ['{', '[', '*', '###', '##', '#']
-    single_marks_closing = ['}', ']', '/*', '/###', '/##', '/#']
+    single_marks_opening = ['[cw:', '{', '[', '*', '###', '##', '#', '\\']
+    single_marks_closing = [']', '}', ']', '/*', '/###', '/##', '/#', '/']
     parser_queue = []
     error_list = []
     valid_tags = []
@@ -76,11 +77,6 @@ def parser(text):
     for i, token in enumerate(tokenized_text):
         if token in single_marks_opening or token in single_marks_closing:
             error_list, parser_queue, valid_tags = parser_single_open_close(token, i, error_list, parser_queue, valid_tags, single_marks_opening, single_marks_closing)
-            pass
-        elif token in single_marks:
-            pass
-            # error_list, parser_queue, valid_tags = parser_single_same(token, i, error_list, parser_queue, valid_tags, single_marks)
-    
     # report
     # 0 - Unexpected (f"Error: expected '{parser_queue[-1][1]}' got '{token}' instead. Position: {i}")
     # 1 - Opening Tag Never Closed(f"Error: opening tag '{orphan[1]}' at position {orphan[0]} was never closed")
@@ -105,5 +101,4 @@ def parser(text):
         #         print(f"Error: Closing tag '{error[2]}' at position {error[0]} was never opened: '{' '.join(tokenized_text[error[0]:error[0]+10])}'")
     else:
         errors = False
-
     return valid_tags, tokenized_text, error_list, errors
