@@ -64,7 +64,7 @@ def file_parser():
 @views.route('/test', methods=['GET', 'POST'])
 def test():
     text = load_txt_file_to_string(os.path.join(views.root_path, session['text'][0], session['text'][1]))
-    print(text[80000:])
+    # print(text[80000:])
     return text;
 
 @views.route('/logout', methods=['GET'])
