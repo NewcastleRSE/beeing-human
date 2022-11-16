@@ -86,7 +86,6 @@ body {
 /* error list styling */
 .parser-result {
     text-align: center;
-    align-self: center;
 }
 
 .error-mark.active {
