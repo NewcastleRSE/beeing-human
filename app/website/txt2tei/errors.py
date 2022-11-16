@@ -34,6 +34,7 @@ def consolidate_positions(mark_positions):
 
 def mark_errors_for_display(errors, tokenized_text):
     mark_positions = find_position_for_display(errors, tokenized_text)
+    print(mark_positions)
     marked_up_text = []
     for i, position in enumerate(mark_positions):
         # if it's the first error, add everything from the start until the error
@@ -44,10 +45,15 @@ def mark_errors_for_display(errors, tokenized_text):
         for token in tokenized_text[position[0]:position[1]]:
             marked_up_text.append(token)
         marked_up_text.append("</span>")
+        
 
         # if it's the last errror, add everything until the end of the text
         if i == len(mark_positions)-1:
             for token in tokenized_text[position[1]:]:
+                marked_up_text.append(token)
+        else:
+            # if it's not the last error, add everything until the start of the next error
+            for token in tokenized_text[position[1]:mark_positions[i+1][0]]:
                 marked_up_text.append(token)
     
     return marked_up_text

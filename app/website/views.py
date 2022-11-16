@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for, jsonify, send_from_directory, flash
+from flask import Blueprint, render_template, request, session, redirect, url_for, jsonify, send_from_directory, flash, current_app
 from werkzeug.utils import secure_filename
 from .utilities.file_operations import allowed_file
 from .utilities.text_manipulation import remove_tags
 import os
 from .txt2tei.file_load import load_txt_file_to_string
+from .txt2tei.file_load import html_safe
 from .txt2tei.parser import parser
 from .txt2tei.md_finders import find_tags_in_text
 from .txt2tei.replace_md_tei import replace_tags
@@ -40,6 +41,8 @@ def file_parser():
     else:
         if request.method == 'GET':
             text = load_txt_file_to_string(os.path.join(views.root_path, session['text'][0], session['text'][1]))
+            # the inclusion of '<' and '>' is playing havoc with the text, so we'll add a space to them, to prevent them from being renedered by the browser
+            text = html_safe(text)
         elif request.method == 'POST':
             text = request.form["text"]
             text = remove_tags(text)
@@ -58,6 +61,11 @@ def file_parser():
             text = "".join(mark_errors_for_display(error_list, tokenized_text))
         return render_template('file-parser.html', text = text, errors_exist = errors, error_list = error_list, converted_text = converted_text)
 
+@views.route('/test', methods=['GET', 'POST'])
+def test():
+    text = load_txt_file_to_string(os.path.join(views.root_path, session['text'][0], session['text'][1]))
+    print(text[80000:])
+    return text;
 
 @views.route('/logout', methods=['GET'])
 def logout():
