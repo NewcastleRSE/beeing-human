@@ -14,7 +14,7 @@ def replace_tags(valid_tags, tokenized_text):
         '[': '<p class="sig">',
         ']': '</p>',
         '\\': '<span class="side-note">',
-        '/': '</span>',
+        '/': '</span>'
     }
     for tag in valid_tags:
         tokenized_text[tag[0]] = tag_to_html[tokenized_text[tag[0]]]
@@ -23,8 +23,9 @@ def replace_tags(valid_tags, tokenized_text):
 
 def add_outer_tags(converted_text):
     outer_tags = {
-        '\r\n\r\n': '</p><p>',
-        '\n\n===\n\n': '<br/>'
+        '\r\n': '</p><p>',
+        '===': '<br/>',
+        '~~~': '<br/>[Ornament]<br/>'
     }
     converted_text = [outer_tags[tag] if tag in outer_tags.keys() else tag for tag in converted_text]
     # changes the first to just an open tag
@@ -32,5 +33,4 @@ def add_outer_tags(converted_text):
         if token == '</p><p>':
             converted_text[i] = '<p>'
             break
-    print(converted_text)
     return converted_text

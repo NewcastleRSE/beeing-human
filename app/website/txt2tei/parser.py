@@ -1,5 +1,5 @@
 def tokenizer_split(split_text):
-    marks = ['[cw:', '[', '{', ']', '}', '/*', '*', '/###', '###', '/##','##', '/#', '#', '~~~', '\\', '/']
+    marks = ['[cw:', '[', '{', ']', '}', '/*', '*', '/###', '###', '/##','##', '/#', '#', '~~~', '\\', '/', '===', '\r\n']
     text_tokenised = []
     for token in split_text:
         new_token = token

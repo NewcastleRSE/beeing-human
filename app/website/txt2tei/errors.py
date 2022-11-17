@@ -16,7 +16,7 @@ def find_position_for_display(errors, tokenized_text):
                     last_position = i
                     break
             mark_positions.append([error[0], error[0] + last_position, str(error_id)])
-    # mark_positions = consolidate_positions(mark_positions)
+    mark_positions = consolidate_positions(mark_positions)
     return mark_positions
 
 def consolidate_positions(mark_positions):
