@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="upload-page">
+    <h3 class="section-header">Upload a file to check</h3>
+    <div class="upload-form">
+        <form method="post" enctype="multipart/form-data" class="file-form">
+            <input type="file" id="file-to-check" name="file">
+            <input type="submit" value="Upload" class="btn">
+        </form>
+    </div>
+</div>
+{% endblock %}

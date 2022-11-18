@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="columns">
+        <div class="text column-3" style="white-space: pre-wrap;">
+            <p contenteditable="True" id="text">{{ text | safe}}</p>
+            <form action="/file-parser" method="POST" class="hidden-form">
+                <textarea name="text" id="text-form" cols="30" rows="10" style="display: none;"></textarea>
+                <input type="submit" value="Update" onclick="transferEditedText()" class="update btn">
+            </form>
+        </div>
+        <div class="parser-result column-3">
+            {%if errors_exist == true %}
+                <ul>
+                {% for error in error_list %}
+                    <li id = "{{loop.index0}}" onclick="highlightErrorToggle(this.id)">
+                    {% if error[1] == 0 %}
+                        Error: expected '{{error[2]}}' got '{{error[3]}}' instead. Position: {{error[0]}}
+                    {% elif error[1] == 1 %}
+                        Error: opening tag '{{error[2]}}' at position {{error[0]}} was never closed
+                    {% elif error[1] == 2 %}
+                        Error: Closing tag '{{error[2]}}' at position {{error[0]}} was never opened:
+                    {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No Errors, all good!</p>
+            {% endif %}
+        </div>
+        <div class="converted-text column-3">
+            {%- if converted_text != false -%}
+                {{converted_text | safe}}
+            {%- else -%}
+                <p class="alert">Some errors exist: correct them to see the display text</p>
+            {%- endif -%}
+        </div>
+    </div>
+{% endblock %}

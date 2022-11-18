@@ -1,0 +1,11 @@
+# virtual environments
+
+venv
+venv/
+env
+env/
+
+# caches
+
+__pycache__
+__pycache__/
