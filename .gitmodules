@@ -1,0 +1,3 @@
+[submodule "beein-human-transcription-checker"]
+	path = beein-human-transcription-checker
+	url = https://github.com/NewcastleRSE/beein-human-transcription-checker.git
