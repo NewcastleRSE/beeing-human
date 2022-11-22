@@ -27,8 +27,11 @@ Newcastle University
 This section is intended to list the frameworks and tools you're using to develop this software. Please link to the home page or documentatation in each case.
 ```
 TBD
+### Textual Encoding
+* [TEI](https://tei-c.org/)
 
-[TEI](https://tei-c.org/)  
+### Transcription Checker auxiliary App
+* [Flask](https://flask.palletsprojects.com/en/2.2.x/)
 
 ## Getting Started
 
