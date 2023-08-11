@@ -4,3 +4,6 @@
 [submodule "beeing-human-web"]
 	path = beeing-human-web
 	url = https://github.com/NewcastleRSE/beeing-human-web.git
+[submodule "beeing-human-tei-data"]
+	path = beeing-human-tei-data
+	url = https://github.com/NewcastleRSE/beeing-human-tei-data.git
